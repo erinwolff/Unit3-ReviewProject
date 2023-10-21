@@ -35,7 +35,7 @@ function Navbar() {
                   <Link to='/profile'>Profile</Link>
                 </li>
                 <li>
-                  <a onClick={handleSubmit}>Logout</a>
+                  <a onClick={handleSubmit}><u>Logout</u></a>
                 </li>
               </>)
               : (
