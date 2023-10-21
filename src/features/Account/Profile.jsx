@@ -1,14 +1,46 @@
 import React from 'react'
 import { useGetUserProfileQuery } from '../auth/authSlice'
-import {useSelector} from 'react-redux'
-import {selectToken} from '../auth/authSlice'
+import { useSelector } from 'react-redux'
+import { selectToken } from '../auth/authSlice'
 
-function Profile(){
+function Profile() {
+  const { data, isLoading, isError } = useGetUserProfileQuery();
+  console.log(data);
+
   const token = useSelector(selectToken)
   console.log(token)
+
+  if (isLoading) {
+    return <div>Loading....</div>
+  }
+
+  if (isError) {
+    return <div>Something went wrong ... </div>
+  }
+
+
+
+
+
+
   return (
     <>
-    <div>Profile</div>
+      <div>
+        <h1>Welcome, {data.data.username}!!!!</h1>
+        <h2>User's Data:</h2>
+        <p>UserID: {data.data._id}</p>
+        <p>Username: {data.data.username}</p>
+        {
+          data.data.posts.length === 0 ?
+            <p>You don't have any posts.</p>
+            : data.data.posts.map(post => {
+              return <div key={post._id}>
+                <h3>{post.title}</h3>
+              </div>
+
+            })
+        }
+      </div>
     </>
   )
 }

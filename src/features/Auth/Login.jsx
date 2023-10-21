@@ -37,7 +37,7 @@ function Login() {
       const response = await authMethod(credentials).unwrap()
       console.log('token:', response.token)
       setTimeout(() => {
-        navigate('/posts')
+        navigate('/profile')
       }, 3000);
     } catch (err) {
       console.log(err)
