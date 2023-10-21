@@ -7,7 +7,14 @@ const COHORT = '2309-FSA-ET-WEB-FT-SF'
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://strangers-things.herokuapp.com/api/${COHORT}`
+    baseUrl: `https://strangers-things.herokuapp.com/api/${COHORT}`,
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().auth.token;
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`)
+      }
+      return headers 
+    }
   }),
   endpoints: () => ({})
 })

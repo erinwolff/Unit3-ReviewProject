@@ -11,19 +11,27 @@ const authApi = api.injectEndpoints({
         url: '/users/register',
         method: 'POST',
         body: { user }
-      })
+      }),
+      transformResponse: (response) => response.data,
     }),
+    
     login: builder.mutation({
       query: (user) => ({
         url: '/users/login',
         method: 'POST',
         body: { user }
+      }),
+      transformResponse: (response) => response.data,
+    }),
+    getUserProfile: builder.query({
+      query: () => ({
+        url: '/users/me'
       })
     })
   })
 })
 
-export const { useRegisterMutation, useLoginMutation } = authApi
+export const { useRegisterMutation, useLoginMutation, useGetUserProfileQuery } = authApi
 
 const TOKEN_KEY = 'token';
 const storeToken = (state, { payload }) => {
