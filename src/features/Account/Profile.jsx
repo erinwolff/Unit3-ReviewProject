@@ -1,7 +1,7 @@
 import React from 'react'
-import { useGetUserProfileQuery } from '../auth/authSlice'
+import { useGetUserProfileQuery } from '../Auth/authSlice'
 import { useSelector } from 'react-redux'
-import { selectToken } from '../auth/authSlice'
+import { selectToken } from '../Auth/authSlice'
 
 function Profile() {
   const { data, isLoading, isError } = useGetUserProfileQuery();
