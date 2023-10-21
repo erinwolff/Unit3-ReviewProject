@@ -1,10 +1,9 @@
 import React from 'react'
-import {useFetchPostsQuery} from './postSlice'
+import { useFetchPostsQuery } from './postSlice'
 
 function Posts() {
-  const {data, error, isLoading} = useFetchPostsQuery();
-  // console.log(data.data.posts)
-
+  const { data, error, isLoading } = useFetchPostsQuery();
+ 
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>{error}</div>
 
@@ -12,7 +11,7 @@ function Posts() {
     <>
       <div className='posts-container'>
         {
-          data.data.posts.map((post)=> {
+          data.data.posts.map((post) => {
             return <div key={post._id}>
               <h2>{post.title}</h2>
               <p>{post.description}</p>
