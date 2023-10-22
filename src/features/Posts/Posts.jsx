@@ -3,6 +3,7 @@ import { useFetchPostsQuery } from './postSlice'
 
 function Posts() {
   const { data, error, isLoading } = useFetchPostsQuery();
+  
  
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>{error}</div>
@@ -17,6 +18,7 @@ function Posts() {
               <p>{post.description}</p>
               <p>{post.location}</p>
               <p>Posted By: {post.author.username}</p>
+              <p>Will Deliver? {post.willDeliver}</p>
             </div>
           })
         }

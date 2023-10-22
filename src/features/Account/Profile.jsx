@@ -2,11 +2,11 @@ import React from 'react'
 import { useGetUserProfileQuery } from '../Auth/authSlice'
 import { useSelector } from 'react-redux'
 import { selectToken } from '../Auth/authSlice'
+import CreatePosts from '../Posts/createPosts'
 
 function Profile() {
   const { data, isLoading, isError } = useGetUserProfileQuery();
-  console.log(data);
-
+  
   const token = useSelector(selectToken)
   console.log(token)
 
@@ -17,11 +17,6 @@ function Profile() {
   if (isError) {
     return <div>Something went wrong ... </div>
   }
-
-
-
-
-
 
   return (
     <>
@@ -36,10 +31,11 @@ function Profile() {
             : data.data.posts.map(post => {
               return <div key={post._id}>
                 <h3>{post.title}</h3>
+                <h4>{post.description}</h4>
               </div>
-
             })
         }
+        <div>Create New Post: <CreatePosts/></div>
       </div>
     </>
   )

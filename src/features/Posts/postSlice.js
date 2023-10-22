@@ -6,11 +6,19 @@ const postApi = api.injectEndpoints({
   endpoints: (builder) => ({
     fetchPosts: builder.query({
       query: () => '/posts'
+    }),
+    addPosts: builder.mutation({
+      query: ({ title, description, price, location, willDeliver }) => ({
+        url: '/posts',
+        method: 'POST',
+        body: { post: { title, description, price, location, willDeliver } },
+      }),
+      transformResponse: (response) => response.data,
     })
   })
 })
 
-export const {useFetchPostsQuery} = postApi
+export const { useFetchPostsQuery, useAddPostsMutation } = postApi
 
 
 // create the slice
@@ -18,7 +26,15 @@ export const {useFetchPostsQuery} = postApi
 const postSlice = createSlice({
   name: 'posts',
   initialState: {
-    posts: []
+    posts: [
+      {
+        title: '',
+        description: '',
+        price: '',
+        location: '',
+        willDeliver: false
+      }
+    ]
   },
   reducers: {
     setPost: (state, action) => {
@@ -29,4 +45,4 @@ const postSlice = createSlice({
 })
 
 export default postSlice.reducer
-export const {setPost}  = postSlice.actions
+export const { setPost } = postSlice.actions
