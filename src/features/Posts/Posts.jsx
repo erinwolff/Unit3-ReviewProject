@@ -18,7 +18,7 @@ function Posts() {
               <p>{post.description}</p>
               <p>{post.location}</p>
               <p>Posted By: {post.author.username}</p>
-              <p>Will Deliver? {post.willDeliver}</p>
+              <p>Will Deliver? {post.willDeliver ? "Yes" : "No"}</p>
             </div>
           })
         }

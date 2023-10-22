@@ -18,24 +18,7 @@ function CreatePosts() {
 
   const dispatch = useDispatch();
 
-  const onNewPostSubmit = async (e) => {
-    e.preventDefault();
-    
-    if (error) {
-      return <div>{error}</div>
-    }
-
-    // write dispatch function here
-    try {
-      const response = await data(formData).unwrap();
-      dispatch(setPost(response));
-    } catch (error) {
-      console.error('This is the error: ', error);
-    }
-
-  };
-
-  // write handle change function here
+  // write handle change function here with the inputs from Posts Form
   const handleChange = (e) => {
     setError(null)
     setLoading(true)
@@ -45,6 +28,32 @@ function CreatePosts() {
       [name]: type === 'checkbox' ? checked : value,
     }));
   };
+
+  const onNewPostSubmit = async (e) => {
+    e.preventDefault();
+
+    if (error) {
+      return <div>{error}</div>
+    }
+
+    // write dispatch function here
+    try {
+      const response = await data(formData).unwrap();
+      dispatch(setPost(response));
+      setFormData({
+        title: '',
+        description: '',
+        price: '',
+        location: '',
+        willDeliver: false
+      });
+    } catch (error) {
+      console.error('This is the error: ', error);
+    }
+  };
+
+
+
 
   return (
     <>
@@ -73,7 +82,7 @@ function CreatePosts() {
           <br />
           <label className="delivery">
             Delivery?
-            <input name='delivery' checked={formData.willDeliver} type="checkbox" onChange={handleChange} />
+            <input name='willDeliver' type="checkbox" checked={formData.willDeliver} onChange={handleChange} />
           </label>
           <br />
           <button type="submit" name="submit">Submit</button>
@@ -82,6 +91,5 @@ function CreatePosts() {
     </>
   );
 }
-
 
 export default CreatePosts
