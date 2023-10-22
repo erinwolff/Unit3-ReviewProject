@@ -20,8 +20,7 @@ function CreatePosts() {
 
   const onNewPostSubmit = async (e) => {
     e.preventDefault();
-    // const action = e.nativeEvent.submitter.name;
-
+    
     if (error) {
       return <div>{error}</div>
     }
