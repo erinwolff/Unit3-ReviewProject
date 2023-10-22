@@ -26,15 +26,7 @@ export const { useFetchPostsQuery, useAddPostsMutation } = postApi
 const postSlice = createSlice({
   name: 'posts',
   initialState: {
-    posts: [
-      {
-        title: '',
-        description: '',
-        price: '',
-        location: '',
-        willDeliver: false
-      }
-    ]
+    posts: [],
   },
   reducers: {
     setPost: (state, action) => {
