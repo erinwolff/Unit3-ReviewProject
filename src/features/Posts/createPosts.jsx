@@ -20,21 +20,20 @@ function CreatePosts() {
 
   const onNewPostSubmit = async (e) => {
     e.preventDefault();
-    const action = e.nativeEvent.submitter.name;
+    // const action = e.nativeEvent.submitter.name;
 
     if (error) {
       return <div>{error}</div>
     }
 
     // write dispatch function here
-    if (action === "submit") {
-      try {
-        const response = await data(formData).unwrap();
-        dispatch(setPost(response));
-      } catch (error) {
-        console.error('This is the error: ', error);
-      }
+    try {
+      const response = await data(formData).unwrap();
+      dispatch(setPost(response));
+    } catch (error) {
+      console.error('This is the error: ', error);
     }
+
   };
 
   // write handle change function here
