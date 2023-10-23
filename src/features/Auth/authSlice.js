@@ -14,7 +14,7 @@ const authApi = api.injectEndpoints({
       }),
       transformResponse: (response) => response.data,
     }),
-    
+
     login: builder.mutation({
       query: (user) => ({
         url: '/users/login',
@@ -52,27 +52,19 @@ const authSlice = createSlice({
       state.token = null;
       localStorage.removeItem(TOKEN_KEY);
     },
-    loginFulfilled: (state, {payload}) => {
-      state.token = payload.token;
-      localStorage.setItem(TOKEN_KEY, payload.token);
-    },
-    registerFulfilled: (state, {payload}) => {
-      state.token = payload.token;
-      localStorage.setItem(TOKEN_KEY, payload.token);
-    }
   },
 
-  // // these extra reducers automatically update the token when the RTK query is fulfilled
-  // extraReducers: (builder) => {
-  //   builder.addMatcher(api.endpoints.login.matchFulfilled, (state, { payload }) => {
-  //     state.token = payload.token;
-  //     localStorage.setItem(TOKEN_KEY, payload.token)
-  //   });
-  //   builder.addMatcher(api.endpoints.register.matchFulfilled, (state, { payload }) => {
-  //     state.token = payload.token;
-  //     localStorage.setItem(TOKEN_KEY, payload.token)
-  //   });
-  // }
+  // these extra reducers automatically update the token when the RTK query is fulfilled
+  extraReducers: (builder) => {
+    builder.addMatcher(api.endpoints.login.matchFulfilled, (state, { payload }) => {
+      state.token = payload.token;
+      localStorage.setItem(TOKEN_KEY, payload.token)
+    });
+    builder.addMatcher(api.endpoints.register.matchFulfilled, (state, { payload }) => {
+      state.token = payload.token;
+      localStorage.setItem(TOKEN_KEY, payload.token)
+    });
+  }
 })
 
 export const { logout } = authSlice.actions
